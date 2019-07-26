@@ -53,8 +53,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 
-let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf='/home/max/.config/nvim/ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf= 0
+let g:ycm_global_ycm_extra_conf = $HOME . '/.config/nvim/ycm_extra_conf.py'
 
 
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -71,5 +71,6 @@ map <C-_> <Plug>NERDCommenterToggle
 
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
+
 
 nmap <F8> :TagbarToggle<CR>

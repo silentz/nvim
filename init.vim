@@ -14,6 +14,7 @@ call plug#begin()
     Plug 'metakirby5/codi.vim'
     Plug 'mhinz/vim-startify'
     Plug 'majutsushi/tagbar' " ctags executable needed
+    Plug 'alvan/vim-closetag'
 call plug#end()
 
 
@@ -53,7 +54,7 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 
 let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf='/home/mepershin/.config/nvim/ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='/home/max/.config/nvim/ycm_extra_conf.py'
 
 
 let g:NERDTreeDirArrowExpandable = '▸'

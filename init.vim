@@ -51,6 +51,7 @@ let g:python3_host_prog = '/usr/bin/python3'
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#tabline#enabled = 1
 
 
 let g:ycm_confirm_extra_conf = 0

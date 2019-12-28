@@ -2,19 +2,20 @@
 
 " ============== [Plugins area] ================
 call plug#begin()
-    Plug 'ycm-core/YouCompleteMe'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Raimondi/delimitMate'
     Plug 'Yggdroot/indentLine'
-    Plug 'powerman/vim-plugin-viewdoc'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-airline/vim-airline'
     Plug 'morhetz/gruvbox'
-    Plug 'metakirby5/codi.vim'
     Plug 'mhinz/vim-startify'
-    Plug 'majutsushi/tagbar' " ctags executable needed
     Plug 'alvan/vim-closetag'
+    Plug 'lervag/vimtex'
+    Plug 'ycm-core/YouCompleteMe'
+    " Plug 'majutsushi/tagbar' " ctags executable needed
+    " Plug 'metakirby5/codi.vim'
+    " Plug 'powerman/vim-plugin-viewdoc'
 call plug#end()
 
 
@@ -44,9 +45,18 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 
+" ============= [Latex settings] ==============
+let g:vimtex_view_method='skim'
+let g:tex_flavor='latex'
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_compiler_progname = 'nvr'
+let g:tex_conceal = ""
+let g:tex_no_error=1
+
 " ============= [Plugin settings] =============
 let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 
 let g:airline#extensions#tabline#enabled = 1
@@ -62,6 +72,25 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = $HOME . '/.config/nvim/ycm_extra_conf.py'
 
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+endif
+
+let g:ycm_semantic_triggers.tex=['re!\\[A-Za-z]+',
+  \ 're!\\(usepackage|RequirePackage)(\s*\[[^]]*\])?\s*\{[^}]*',
+  \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
+  \ 're!\\begin(\s*\[[^]]*\])?\s*\{[^}]*',
+  \ 're!\\end(\s*\[[^]]*\])?\s*\{[^}]*',
+  \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+  \ 're!\\(text|block)cquote\*?(\[[^]]*\]){0,2}{[^}]*',
+  \ 're!\\(for|hy)[A-Za-z]*cquote\*?{[^}]*}(\[[^]]*\]){0,2}{[^}]*',
+  \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+  \ 're!\\hyperref\[[^]]*',
+  \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+  \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+  \ 're!\\(include(only)?|input|subfile){[^}]*',
+  \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+  \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*']
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -79,4 +108,4 @@ let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 
 
-nmap <F8> :TagbarToggle<CR>
+" nmap <F8> :TagbarToggle<CR>

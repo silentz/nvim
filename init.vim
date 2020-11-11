@@ -1,24 +1,34 @@
+" NeoVim config v3.0
+" Author: github.com/silentz
 
 
-" ============== [Plugins area] ================
+" ============== [Plugins] ================
+
 call plug#begin()
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'Raimondi/delimitMate'
-    Plug 'Yggdroot/indentLine'
-    Plug 'scrooloose/nerdtree'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'vim-airline/vim-airline'
+
+    " Interface
     Plug 'mhinz/vim-startify'
-    Plug 'alvan/vim-closetag'
-    Plug 'lervag/vimtex'
-    Plug 'ycm-core/YouCompleteMe'
-    Plug 'morhetz/gruvbox'
-    Plug 'tpope/vim-fugitive'
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'scrooloose/nerdtree'
+    Plug 'itchyny/lightline.vim'
     Plug 'ryanoasis/vim-devicons'
+
+    " Python specific
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+    " Coding general
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'Yggdroot/indentLine'
+    Plug 'preservim/tagbar'
+    Plug 'Raimondi/delimitMate'
+    Plug 'ntpeters/vim-better-whitespace'
+
 call plug#end()
 
 
-" ============== [Vim embedded settings] ================
+" ============== [Embedded] ================
+
 set shiftwidth=4
 set tabstop=4
 set autoindent
@@ -36,57 +46,35 @@ inoremap <C-Left> <Esc>:tabprevious<CR>
 inoremap <C-Right> <Esc>:tabnext<CR>
 
 
-" ============= [Interface colorscheme] =============
-set background=dark
-let g:gruvbox_contrast_dark = 'medium'
-filetype plugin on
-silent colorscheme gruvbox
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+" ============= [Interface] =============
+
+set termguicolors
+let ayucolor="mirage"
+colorscheme ayu
 
 
-" ============= [CloseTag and DelimitMate] =============
-let g:closetag_filenames = "*.xml,*.html,*.xhtml,*.phtml,*.php"
-au FileType xml,html,phtml,php,xhtml,js let b:delimitMate_matchpairs = "(:),[:],{:}"
+" ============= [Plugins conf] =============
 
-
-" ============= [Plugin settings] =============
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
-
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-
-
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = $HOME . '/.config/nvim/ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
-
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-endif
-
-
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" NERDTree
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 map <C-n> :NERDTreeToggle<CR>
 
-
+" NERDCommenter
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 map <C-_> <Plug>NERDCommenterToggle
 
-
+" indentLine
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
+autocmd Filetype json let g:indentLine_setConceal = 0
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" lightline
+let g:lightline = {'colorscheme': 'ayu_mirage'}
+

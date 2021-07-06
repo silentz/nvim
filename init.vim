@@ -16,6 +16,7 @@ call plug#begin()
     " Python specific
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'fannheyward/coc-pyright'
 
     " Coding general
     Plug 'scrooloose/nerdcommenter'
@@ -23,6 +24,7 @@ call plug#begin()
     Plug 'preservim/tagbar'
     Plug 'Raimondi/delimitMate'
     Plug 'ntpeters/vim-better-whitespace'
+    Plug 'fatih/vim-go'
 
 call plug#end()
 

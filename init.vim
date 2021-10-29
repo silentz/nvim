@@ -1,4 +1,4 @@
-" NeoVim config v3.0
+" Neovim config v4.0
 " Author: github.com/silentz
 
 
@@ -13,18 +13,26 @@ call plug#begin()
     Plug 'itchyny/lightline.vim'
     Plug 'ryanoasis/vim-devicons'
 
-    " Python specific
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-    Plug 'fannheyward/coc-pyright'
-
     " Coding general
+    Plug 'ekalinin/dockerfile.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Yggdroot/indentLine'
-    Plug 'preservim/tagbar'
     Plug 'Raimondi/delimitMate'
     Plug 'ntpeters/vim-better-whitespace'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Python specific
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'fannheyward/coc-pyright'
+    Plug 'raimon49/requirements.txt.vim'
+    Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+
+    " Golang specific
     Plug 'fatih/vim-go'
+    Plug 'sebdah/vim-delve'
+
+    " C++ specific
+    Plug 'octol/vim-cpp-enhanced-highlight'
 
 call plug#end()
 
@@ -57,6 +65,9 @@ colorscheme ayu
 
 " ============= [Plugins conf] =============
 
+" pydocstring
+let g:pydocstring_formatter = 'numpy'
+
 " NERDTree
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
@@ -73,9 +84,6 @@ map <C-_> <Plug>NERDCommenterToggle
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 autocmd Filetype json let g:indentLine_setConceal = 0
-
-" tagbar
-nmap <F8> :TagbarToggle<CR>
 
 " lightline
 let g:lightline = {'colorscheme': 'ayu_mirage'}

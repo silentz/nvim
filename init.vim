@@ -11,24 +11,29 @@ call plug#begin()
     " Interface
     Plug 'mhinz/vim-startify'
     Plug 'ayu-theme/ayu-vim'
-    Plug 'scrooloose/nerdtree'
     Plug 'itchyny/lightline.vim'
     Plug 'ryanoasis/vim-devicons'
 
-    " Python
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-    Plug 'fannheyward/coc-pyright'
-
     " General
+    Plug 'scrooloose/nerdtree'
+    Plug 'ekalinin/dockerfile.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Yggdroot/indentLine'
-    Plug 'preservim/tagbar'
     Plug 'Raimondi/delimitMate'
     Plug 'ntpeters/vim-better-whitespace'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " Python
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'fannheyward/coc-pyright'
+    Plug 'raimon49/requirements.txt.vim'
+    Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 
     " Golang
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+    " C++ specific
+    Plug 'octol/vim-cpp-enhanced-highlight'
 
 call plug#end()
 
@@ -47,7 +52,7 @@ set shiftwidth=4           " left/right shift command spaces
 set smartindent            " see ':help smartindent'
 set tabstop=4              " tab symbol width in spaces
 set termguicolors          " enable 24-bit rgb colors
-set fillchars+=vert:\
+
 
 " ====================
 "    Tab management
@@ -67,6 +72,13 @@ inoremap <C-Right> <Esc>:tabnext<CR>
 let g:lightline = {'colorscheme': 'ayu_mirage'}
 let ayucolor="mirage"
 colorscheme ayu
+
+
+" =========================
+"    Python IDE settings
+" =========================
+
+let g:pydocstring_formatter = 'numpy'
 
 
 " =========================
@@ -104,22 +116,29 @@ let g:go_debug_windows = {
     \ }
 
 
-" NERDTree
+" ========================
+"    File tree settings
+" ========================
+
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 map <C-n> :NERDTreeToggle<CR>
 
-" NERDCommenter
+" ======================
+"    Comment settings
+" ======================
+
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 map <C-_> <Plug>NERDCommenterToggle
 
-" indentLine
+" ======================
+"    Indent settings
+" ======================
+
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 autocmd Filetype json let g:indentLine_setConceal = 0
 
-" tagbar
-" nmap <F8> :TagbarToggle<CR>

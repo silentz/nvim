@@ -1,19 +1,21 @@
-" Neovim config v4.0
-" Author: github.com/silentz
+" Neovim config by
+" github.com/silentz
 
 
-" ============== [Plugins] ================
+" =====================
+"    Loading plugins
+" =====================
 
 call plug#begin()
 
     " Interface
     Plug 'mhinz/vim-startify'
     Plug 'ayu-theme/ayu-vim'
-    Plug 'scrooloose/nerdtree'
     Plug 'itchyny/lightline.vim'
     Plug 'ryanoasis/vim-devicons'
 
-    " Coding general
+    " General
+    Plug 'scrooloose/nerdtree'
     Plug 'ekalinin/dockerfile.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'Yggdroot/indentLine'
@@ -21,15 +23,14 @@ call plug#begin()
     Plug 'ntpeters/vim-better-whitespace'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    " Python specific
+    " Python
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
     Plug 'fannheyward/coc-pyright'
     Plug 'raimon49/requirements.txt.vim'
     Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 
-    " Golang specific
-    Plug 'fatih/vim-go'
-    Plug 'sebdah/vim-delve'
+    " Golang
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
     " C++ specific
     Plug 'octol/vim-cpp-enhanced-highlight'
@@ -37,17 +38,25 @@ call plug#begin()
 call plug#end()
 
 
-" ============== [Embedded] ================
+" =====================
+"    Common settings
+" =====================
 
-set shiftwidth=4
-set tabstop=4
-set autoindent
-set smartindent
-set mouse=a
-set number
-set expandtab
-set clipboard+=unnamedplus
-set colorcolumn=120
+set autoindent             " copy indent from previous line
+set clipboard+=unnamedplus " use system clipboard for all operations
+set colorcolumn=120        " vertical line to align text
+set expandtab              " replace tab symbol with spaces
+set mouse=a                " activate mouse actions
+set number                 " show line numbers
+set shiftwidth=4           " left/right shift command spaces
+set smartindent            " see ':help smartindent'
+set tabstop=4              " tab symbol width in spaces
+set termguicolors          " enable 24-bit rgb colors
+
+
+" ====================
+"    Tab management
+" ====================
 
 nnoremap <C-t> :tabnew<CR>
 nnoremap <C-Left> :tabprevious<CR>
@@ -56,35 +65,79 @@ inoremap <C-Left> <Esc>:tabprevious<CR>
 inoremap <C-Right> <Esc>:tabnext<CR>
 
 
-" ============= [Interface] =============
+" ========================
+"    Interface settings
+" ========================
 
-set termguicolors
+let g:lightline = {'colorscheme': 'ayu_mirage'}
 let ayucolor="mirage"
 colorscheme ayu
 
 
-" ============= [Plugins conf] =============
+" =========================
+"    Python IDE settings
+" =========================
 
-" pydocstring
 let g:pydocstring_formatter = 'numpy'
 
-" NERDTree
+
+" =========================
+"    Golang IDE settings
+" =========================
+
+let g:go_metalinter_autosave = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
+au FileType go nmap <F1> :GoDoc<cr>
+au FileType go nmap <F2> :GoTest<cr>
+au FileType go nmap <F3> :GoDef<cr>
+au FileType go nmap <F4> :GoCallers<cr>
+
+au FileType go nmap <F5> :GoDebugBreakpoint<cr>
+au FileType go nmap <F6> :GoDebugPrint<cr>
+au FileType go nmap <F7> :GoDebugRestart<cr>
+au FileType go nmap <F8> :GoDebugStop<cr>
+
+au FileType go nmap <F9>  :GoDebugStep<cr>
+au FileType go nmap <F10> :GoDebugNext<cr>
+au FileType go nmap <F11> :GoDebugStepOut<cr>
+au FileType go nmap <F12> :GoDebugContinue<cr>
+
+let g:go_debug_windows = {
+            \ 'vars':       'rightbelow 30vnew',
+            \ 'stack':      'rightbelow 10new',
+    \ }
+
+
+" ========================
+"    File tree settings
+" ========================
+
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 map <C-n> :NERDTreeToggle<CR>
 
-" NERDCommenter
+" ======================
+"    Comment settings
+" ======================
+
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 map <C-_> <Plug>NERDCommenterToggle
 
-" indentLine
+" ======================
+"    Indent settings
+" ======================
+
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 autocmd Filetype json let g:indentLine_setConceal = 0
-
-" lightline
-let g:lightline = {'colorscheme': 'ayu_mirage'}
-

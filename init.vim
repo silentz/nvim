@@ -1,6 +1,10 @@
 " Neovim config by
 " github.com/silentz
 
+" Required post install commands:
+" CocInstall coc-go
+" CocInstall coc-pyright
+" CocInstall coc-vimtex
 
 " =====================
 "    Loading plugins
@@ -25,7 +29,6 @@ call plug#begin()
 
     " Python
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-    Plug 'fannheyward/coc-pyright'
     Plug 'raimon49/requirements.txt.vim'
     Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 
@@ -34,6 +37,9 @@ call plug#begin()
 
     " C++ specific
     Plug 'octol/vim-cpp-enhanced-highlight'
+
+    " Latex
+    Plug 'lervag/vimtex'
 
 call plug#end()
 
@@ -53,6 +59,8 @@ set smartindent            " see ':help smartindent'
 set tabstop=4              " tab symbol width in spaces
 set termguicolors          " enable 24-bit rgb colors
 
+" let g:python_host_prog="/usr/bin/python2.7"
+let g:python3_host_prog="/usr/bin/python3.10"
 
 " ====================
 "    Tab management
@@ -95,27 +103,6 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 
-au FileType go nmap <F1> :GoDoc<cr>
-au FileType go nmap <F2> :GoTest<cr>
-au FileType go nmap <F3> :GoDef<cr>
-au FileType go nmap <F4> :GoCallers<cr>
-
-au FileType go nmap <F5> :GoDebugBreakpoint<cr>
-au FileType go nmap <F6> :GoDebugPrint<cr>
-au FileType go nmap <F7> :GoDebugRestart<cr>
-au FileType go nmap <F8> :GoDebugStop<cr>
-
-au FileType go nmap <F9>  :GoDebugStep<cr>
-au FileType go nmap <F10> :GoDebugNext<cr>
-au FileType go nmap <F11> :GoDebugStepOut<cr>
-au FileType go nmap <F12> :GoDebugContinue<cr>
-
-let g:go_debug_windows = {
-            \ 'vars':       'rightbelow 30vnew',
-            \ 'stack':      'rightbelow 10new',
-    \ }
-
-
 " ========================
 "    File tree settings
 " ========================
@@ -141,3 +128,9 @@ map <C-_> <Plug>NERDCommenterToggle
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_leadingSpaceChar = '·'
 autocmd Filetype json let g:indentLine_setConceal = 0
+
+" ======================
+"    Latex settings
+" ======================
+
+autocmd Filetype tex let g:indentLine_setConceal = 0

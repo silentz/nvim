@@ -41,6 +41,9 @@ call plug#begin()
     " Latex
     Plug 'lervag/vimtex'
 
+    " Dart
+    Plug 'dart-lang/dart-vim-plugin'
+
 call plug#end()
 
 
